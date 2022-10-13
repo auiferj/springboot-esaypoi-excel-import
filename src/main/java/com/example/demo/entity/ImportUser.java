@@ -20,7 +20,7 @@ public class ImportUser implements Serializable {
     private String name;
     @Excel(name = "年龄", orderNum = "1")
     private Integer age;
-    @Excel(name = "性别", orderNum = "2", replace = {"男_1","女_2"}, addressList = true)
+    @Excel(name = "性别", orderNum = "2", replace = {"男_1","女_2"})
     private Integer sex;
     @Excel(name = "地址", orderNum = "3")
     private String address;
