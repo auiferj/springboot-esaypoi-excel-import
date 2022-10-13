@@ -36,7 +36,7 @@ public class ResultResponse<T> implements Serializable {
     }
 
     public static <T> ResultResponse<T> success() {
-        return new ResultResponse(ResultCode.C200.getCode(), (String) null, (Object) null);
+        return new ResultResponse(ResultCode.C200.getCode(), (String) ResultCode.C200.getDesc(), (Object) null);
     }
 
     public static <T> ResultResponse<T> success(T data) {

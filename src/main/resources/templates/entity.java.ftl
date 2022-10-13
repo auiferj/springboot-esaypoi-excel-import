@@ -15,13 +15,13 @@ import lombok.experimental.Accessors;
 </#if>
 
 /**
-* <p>
-    * ${table.comment!}
-    * </p>
-*
-* @author ${author}
-* @since ${date}
-*/
+ * <p>
+ * ${table.comment!}
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
 <#if entityLombokModel>
 @Data
     <#if chainModel>
@@ -37,11 +37,11 @@ import lombok.experimental.Accessors;
 <#if superEntityClass??>
 public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}></#if> {
 <#elseif activeRecord>
-    public class ${entity} extends Model<${entity}> {
+public class ${entity} extends Model<${entity}> {
 <#elseif entitySerialVersionUID>
-    public class ${entity} implements Serializable {
+public class ${entity} implements Serializable {
 <#else>
-    public class ${entity} {
+public class ${entity} {
 </#if>
 <#if entitySerialVersionUID>
 
@@ -55,40 +55,40 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
 
     <#if field.comment!?length gt 0>
         <#if swagger>
-            @ApiModelProperty("${field.comment}")
+    @ApiModelProperty("${field.comment}")
         <#else>
-            /**
-            * ${field.comment}
-            */
+    /**
+     * ${field.comment}
+     */
         </#if>
     </#if>
     <#if field.keyFlag>
-    <#-- 主键 -->
+        <#-- 主键 -->
         <#if field.keyIdentityFlag>
-            @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
+    @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
         <#elseif idType??>
-            @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
+    @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
         <#elseif field.convert>
-            @TableId("${field.annotationColumnName}")
+    @TableId("${field.annotationColumnName}")
         </#if>
-    <#-- 普通字段 -->
+        <#-- 普通字段 -->
     <#elseif field.fill??>
     <#-- -----   存在字段填充设置   ----->
         <#if field.convert>
-            @TableField(value = "${field.annotationColumnName}", fill = FieldFill.${field.fill})
+    @TableField(value = "${field.annotationColumnName}", fill = FieldFill.${field.fill})
         <#else>
-            @TableField(fill = FieldFill.${field.fill})
+    @TableField(fill = FieldFill.${field.fill})
         </#if>
     <#elseif field.convert>
-        @TableField("${field.annotationColumnName}")
+    @TableField("${field.annotationColumnName}")
     </#if>
-<#-- 乐观锁注解 -->
+    <#-- 乐观锁注解 -->
     <#if field.versionField>
-        @Version
+    @Version
     </#if>
-<#-- 逻辑删除注解 -->
+    <#-- 逻辑删除注解 -->
     <#if field.logicDeleteField>
-        @TableLogic
+    @TableLogic
     </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>
@@ -101,26 +101,26 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
         <#else>
             <#assign getprefix="get"/>
         </#if>
-        public ${field.propertyType} ${getprefix}${field.capitalName}() {
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
         return ${field.propertyName};
-        }
+    }
 
-        <#if chainModel>
-            public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
-        <#else>
-            public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
-        </#if>
+    <#if chainModel>
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    <#else>
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    </#if>
         this.${field.propertyName} = ${field.propertyName};
         <#if chainModel>
-            return this;
+        return this;
         </#if>
-        }
+    }
     </#list>
 </#if>
 
 <#if entityColumnConstant>
     <#list table.fields as field>
-        public static final String ${field.name?upper_case} = "${field.name}";
+    public static final String ${field.name?upper_case} = "${field.name}";
 
     </#list>
 </#if>
@@ -138,7 +138,7 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
 <#if !entityLombokModel>
     @Override
     public String toString() {
-    return "${entity}{" +
+        return "${entity}{" +
     <#list table.fields as field>
         <#if field_index==0>
             "${field.propertyName}=" + ${field.propertyName} +
@@ -146,7 +146,7 @@ public class ${entity} extends ${superEntityClass}<#if activeRecord><${entity}><
             ", ${field.propertyName}=" + ${field.propertyName} +
         </#if>
     </#list>
-    "}";
+        "}";
     }
 </#if>
 }

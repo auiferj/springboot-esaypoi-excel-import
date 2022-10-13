@@ -8,3 +8,9 @@ spring:
     password: root
     url: jdbc:mysql://127.0.0.1:3306/fk?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  global-config:
+    refresh-mapper: true      #是否自动刷新mapper
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl     #日志输出类

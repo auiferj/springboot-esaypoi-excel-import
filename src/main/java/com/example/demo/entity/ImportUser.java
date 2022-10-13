@@ -1,12 +1,14 @@
 package com.example.demo.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
+import lombok.Data;
 
 import java.io.Serializable;
 
 /**
  * @author lenovo
  */
+@Data
 public class ImportUser implements Serializable {
     private static final long serialVersionUID = 1L;
     /**
@@ -18,8 +20,8 @@ public class ImportUser implements Serializable {
     private String name;
     @Excel(name = "年龄", orderNum = "1")
     private Integer age;
-    @Excel(name = "性别", orderNum = "2")
-    private String sex;
+    @Excel(name = "性别", orderNum = "2", replace = {"男_1","女_2"}, addressList = true)
+    private Integer sex;
     @Excel(name = "地址", orderNum = "3")
     private String address;
     @Excel(name = "用户描述", orderNum = "4")
