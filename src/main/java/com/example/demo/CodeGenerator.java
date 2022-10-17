@@ -105,7 +105,7 @@ public class CodeGenerator {
                         .parent("")
                         .xml("mapper")
                         .entity(PACKAGE_EXE+".entity")
-                        .mapper(PACKAGE_EXE+".dao")
+                        .mapper(PACKAGE_EXE+".mapper")
                         .service(PACKAGE_EXE+".service")
                         .serviceImpl(PACKAGE_EXE+".service.impl")
                         .controller(PACKAGE_EXE+".controller")
