@@ -7,11 +7,13 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.utils.EasyPoiUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public void importForSheetUsers(MultipartFile file) throws IOException {
+        //分批进行读取excel的sheet工作表.
+        // 一般情况下，不同的sheet表一般对应的都是不同的数据内容.这里只做演示，没有制定几个不同的导入类。
+        //读取第一个sheet表
+        List<ImportUser> sheetOneUsers = EasyPoiUtils.importExcel(file.getInputStream(), 0, 1, 1, ImportUser.class);
+        //读取第二个sheet表
+        List<ImportUser> sheetTwoUsers = EasyPoiUtils.importExcel(file.getInputStream(), 1, 1, 1, ImportUser.class);
+        //批量插入
+        this.saveUsers(sheetOneUsers);
+        this.saveUsers(sheetTwoUsers);
     }
 
     private boolean saveUsers(List<ImportUser> users){

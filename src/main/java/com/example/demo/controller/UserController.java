@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * <p>
  *  前端控制器
@@ -23,6 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     /**
+     * 单sheet
      * excel批量导入用户
      */
     @GetMapping("/import")
@@ -31,5 +34,15 @@ public class UserController {
             return ResultResponse.success();
         }
         return ResultResponse.error("操作失败");
+    }
+
+    /**
+     * 多sheet
+     * excel批量导入用户
+     */
+    @GetMapping("/importForSheetUsers")
+    public ResultResponse<Boolean> importForSheetUsers(@RequestParam("file") MultipartFile file) throws IOException {
+        userService.importForSheetUsers(file);
+        return ResultResponse.success();
     }
 }

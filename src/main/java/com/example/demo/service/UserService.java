@@ -4,6 +4,8 @@ import com.example.demo.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 /**
  * <p>
  *  服务类
@@ -19,4 +21,11 @@ public interface UserService extends IService<User> {
      * @return
      */
     Boolean importUsers(MultipartFile file);
+
+    /***
+     * excel多sheet导入
+     * @param file
+     * @throws IOException
+     */
+    void importForSheetUsers(MultipartFile file) throws IOException;
 }
