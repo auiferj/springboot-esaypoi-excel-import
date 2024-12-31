@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,4 +29,6 @@ public interface UserService extends IService<User> {
      * @throws IOException
      */
     void importForSheetUsers(MultipartFile file) throws IOException;
+
+    Map<String, Object> importExcelOverwriteExisting(MultipartFile file, boolean overwriteExisting);
 }

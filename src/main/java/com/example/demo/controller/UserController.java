@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * <p>
@@ -44,5 +45,16 @@ public class UserController {
     public ResultResponse<Boolean> importForSheetUsers(@RequestParam("file") MultipartFile file) throws IOException {
         userService.importForSheetUsers(file);
         return ResultResponse.success();
+    }
+
+    /**
+     * 单sheet
+     * excel批量导入用户
+     * 校验是否数据已存在并返回校验结果，选择覆盖之后，继续导入
+     */
+    @GetMapping("/importExcelOverwriteExisting")
+    public ResultResponse<Map<String, Object>> importExcelOverwriteExisting(@RequestParam("file") MultipartFile file,boolean overwriteExisting) {
+        Map<String, Object> result = userService.importExcelOverwriteExisting(file,overwriteExisting);
+        return ResultResponse.success(result);
     }
 }

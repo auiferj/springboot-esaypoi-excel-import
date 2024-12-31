@@ -26,4 +26,8 @@ public class ImportUser implements Serializable {
     private String address;
     @Excel(name = "用户描述", orderNum = "4")
     private String describes;
+    @Excel(name = "流水号", orderNum = "5")
+    private String no;
+    @Excel(name = "机构名称", orderNum = "6")
+    private String orgName;
 }

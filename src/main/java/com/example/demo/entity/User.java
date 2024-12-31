@@ -56,5 +56,11 @@ public class User implements Serializable {
     @TableField("update_time")
     private LocalDateTime updateTime;
 
+    @TableField("no")
+    private String no;
+
+    @TableField("org_name")
+    private String orgName;
+
 
 }
